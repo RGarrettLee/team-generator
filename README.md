@@ -19,6 +19,5 @@ node index.js
 ## Tests
 
 ```
-node index.js example
-node index.js test
+npm run test
 ```
