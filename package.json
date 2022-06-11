@@ -2,5 +2,27 @@
   "dependencies": {
     "inquirer": "^8.2.4",
     "jest": "^28.1.1"
-  }
+  },
+  "name": "team-generator",
+  "description": "Using this tool you can create a profile page for your team by filling out a form for each member and streamline the process significantly",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RGarrettLee/team-generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RGarrettLee/team-generator/issues"
+  },
+  "homepage": "https://github.com/RGarrettLee/team-generator#readme"
 }
