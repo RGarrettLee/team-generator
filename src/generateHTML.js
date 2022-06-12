@@ -30,7 +30,7 @@ function generateCards(data) { // run a for loop to generate card html to a long
                 break;
             case 'Engineer':
                 ico = engineerIco;
-                uniqueData = `<li class="listTable list-group-item">Github: <a href="${members[i].getGithub()}">${members[i].github} target="_blank"</a></li>`
+                uniqueData = `<li class="listTable list-group-item">Github: <a href="${members[i].getGithub()}" target="_blank">${members[i].github}</a></li>`
                 break;
             case 'Intern':
                 ico = internIco;
