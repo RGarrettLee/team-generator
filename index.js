@@ -5,8 +5,7 @@ const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
 
-let team = {}; // create new object to hold the inputted team
-let count = [0, 0]; // keep track of amount of engineers/interns on a team
+let team = {manager: undefined, engineers: [], interns: []}; // create new object to hold the inputted team
 
 function writeToFile(fileName, data) { // write to file function
     fs.writeFile(`./dist/${fileName}.html`, data, (err) => {
@@ -19,10 +18,10 @@ async function addMembers(question) { // loops through inquirer prompts to allow
         .prompt(question)
         .then(response => {
             switch (response.role) {
-                case 'Done':
-                    console.log(team);
+                case 'Done': // when done, generate HTML
+                    writeToFile('index', html(team));
                     return;
-                case 'Engineer':
+                case 'Engineer': // add an engineer role to the team
                     inquirer
                         .prompt([
                             {
@@ -47,12 +46,11 @@ async function addMembers(question) { // loops through inquirer prompts to allow
                             }
                         ])
                         .then(response => {
-                            team[`eng${count[0]}`] = new Engineer(response.name, response.id, response.email, response.github);
-                            count[0]++;
+                            team.engineers.push(new Engineer(response.name, response.id, response.email, response.github));
                             return addMembers(question);
                         });
                     break;
-                case 'Intern':
+                case 'Intern': // add an intern role to the team
                     inquirer
                         .prompt([
                             {
@@ -77,8 +75,7 @@ async function addMembers(question) { // loops through inquirer prompts to allow
                             }
                         ])
                         .then(response => {
-                            team[`intern${count[1]}`] = new Intern(response.name, response.id, response.email, response.school);
-                            count[1]++;
+                            team.interns.push(new Intern(response.name, response.id, response.email, response.school));
                             return addMembers(question);
                         });
                     break;
@@ -90,17 +87,17 @@ function init() { // main function to run the program
     if (process.argv[2] === 'test' || process.argv[2] === 'example') { // run example 
         const example = {
             manager: new Manager('Janice', 1, 'janice@company.com', 1),
-            eng1: new Engineer('Brad', 2, 'brad@company.com', 'ItzBrad'),
-            eng2: new Engineer('Chad', 3, 'chad@company.com', 'chadscode'),
-            eng3: new Engineer('Tad', 4, 'tad@company.com', 'typertad'),
-            intern: new Intern('Jerry', 5, 'jerry@company.com', 'MIT')
+            engineers: [new Engineer('Brad', 2, 'brad@company.com', 'ItzBrad'),
+            new Engineer('Chad', 3, 'chad@company.com', 'chadscode'),
+            new Engineer('Tad', 4, 'tad@company.com', 'typertad')],
+            interns: [new Intern('Jerry', 5, 'jerry@company.com', 'MIT')]
         }
 
         writeToFile('example', html(example));
         return;
     }
 
-    inquirer
+    inquirer // gets initial manager input
     .prompt([
         {
             type: 'input',
@@ -125,7 +122,7 @@ function init() { // main function to run the program
     ])
     .then(response => {
         team['manager'] = new Manager(response.name, response.id, response.email, response.officeNumber);
-        addMembers([{type: 'list', message: 'Add a team role', choices: ['Engineer', 'Intern', 'Done'], name: 'role'}]);
+        addMembers([{type: 'list', message: 'Add a team role', choices: ['Engineer', 'Intern', 'Done'], name: 'role'}]); // runs prompt loop to get the rest of the info
     })
 }
 
