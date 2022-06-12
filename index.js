@@ -46,7 +46,7 @@ async function addMembers(question) { // loops through inquirer prompts to allow
                             }
                         ])
                         .then(response => {
-                            team.engineers.push(new Engineer(response.name, response.id, response.email, response.github));
+                            team.engineers.push(new Engineer(response.name, parseInt(response.id), response.email, response.github));
                             return addMembers(question);
                         });
                     break;
@@ -75,7 +75,7 @@ async function addMembers(question) { // loops through inquirer prompts to allow
                             }
                         ])
                         .then(response => {
-                            team.interns.push(new Intern(response.name, response.id, response.email, response.school));
+                            team.interns.push(new Intern(response.name, parseInt(response.id), response.email, response.school));
                             return addMembers(question);
                         });
                     break;
@@ -121,7 +121,7 @@ function init() { // main function to run the program
         }
     ])
     .then(response => {
-        team['manager'] = new Manager(response.name, response.id, response.email, response.officeNumber);
+        team['manager'] = new Manager(response.name, parseInt(response.id), response.email, parseInt(response.officeNumber));
         addMembers([{type: 'list', message: 'Add a team role', choices: ['Engineer', 'Intern', 'Done'], name: 'role'}]); // runs prompt loop to get the rest of the info
     })
 }
