@@ -11,6 +11,12 @@ describe("Intern", () => {
             expect(danny.school).toEqual('MIT');
         });
 
+        it ('should throw an error if missing arguments', () => { // missing school
+            const cb = () => new Intern();
+
+            expect(cb).toThrow();
+        });
+
         it ('should throw an error if missing "school" argument', () => { // missing school
             const cb = () => new Intern('Danny', 77, 'danny@email.com');
 

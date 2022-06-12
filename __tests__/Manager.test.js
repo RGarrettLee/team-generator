@@ -11,6 +11,12 @@ describe("Manager", () => {
             expect(michael.officeNumber).toEqual(1);
         });
 
+        it ('should throw an error if missing arguments', () => { // missing school
+            const cb = () => new Manager();
+
+            expect(cb).toThrow();
+        });
+
         it ('should throw an error if missing "officeNumber" argument', () => { // missing officeNumber
             const cb = () => new Manager('Michael', 1, 'michael@email.com');
 
@@ -19,6 +25,12 @@ describe("Manager", () => {
 
         it ('should throw an error if "officeNumber" argument is wrong type', () => {
             const cb = () => new Manager('Michael', 1, 'michael@email.com', '1');
+
+            expect(cb).toThrow();
+        });
+
+        it ('should throw an error if "officeNumber" argument is a negative number', () => {
+            const cb = () => new Manager('Michael', 1, 'michael@email.com', -1);
 
             expect(cb).toThrow();
         });

@@ -10,6 +10,12 @@ describe("Employee", () => {
             expect(jerry.email).toEqual('jerry@email.com');
         });
 
+        it ('should throw an error if missing arguments', () => { // missing school
+            const cb = () => new Employee();
+
+            expect(cb).toThrow();
+        });
+
         it ('should throw an error if missing "email" argument', () => { // missing email
             const cb = () => new Employee('Jerry', 1);
 
@@ -42,6 +48,12 @@ describe("Employee", () => {
 
         it ('should throw an error if "name" is an incorrect type', () => { // name wrong type
             const cb = () => new Employee(55, 1, 'jerry@email.com');
+
+            expect(cb).toThrow();
+        });
+
+        it ('should throw an error if "id" is a negative number', () => {
+            const cb = () => new Employee('Jerry', -5, 'jerry@email.com');
 
             expect(cb).toThrow();
         });

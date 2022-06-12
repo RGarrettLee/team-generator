@@ -11,6 +11,12 @@ describe("Engineer", () => {
             expect(garrett.github).toEqual('RGarrettLee');
         });
 
+        it ('should throw an error if missing arguments', () => { // missing school
+            const cb = () => new Engineer();
+
+            expect(cb).toThrow();
+        });
+
         it ('should throw an error if missing "github" argument', () => { // missing github username
             const cb = () => new Engineer('Garrett', 4253, 'garrett@email.com');
 
