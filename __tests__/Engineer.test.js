@@ -16,5 +16,27 @@ describe("Engineer", () => {
 
             expect(cb).toThrow();
         });
+
+        it ('should throw an error if "github" argument is wrong type', () => { // missing github username
+            const cb = () => new Engineer('Garrett', 4253, 'garrett@email.com', 5555);
+
+            expect(cb).toThrow();
+        });
+    });
+
+    describe("getRole", () => {
+        it ('should return "Engineer" as it is a special role compared to "Employee"', () => {
+            const garrett = new Engineer('Garrett', 4253, 'garrett@email.com', 'RGarrettLee');
+
+            expect(garrett.getRole()).toEqual('Engineer');
+        });
+    });
+
+    describe("getGithub", () => {
+        it ('should return a link to the Engineer\'s github', () => {
+            const garrett = new Engineer('Garrett', 4253, 'garrett@email.com', 'RGarrettLee');
+
+            expect(garrett.getGithub()).toEqual(`https://github.com/${garrett.github}/`);
+        });
     });
 });

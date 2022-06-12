@@ -16,5 +16,19 @@ describe("Manager", () => {
 
             expect(cb).toThrow();
         });
+
+        it ('should throw an error if "officeNumber" argument is wrong type', () => {
+            const cb = () => new Manager('Michael', 1, 'michael@email.com', '1');
+
+            expect(cb).toThrow();
+        });
     });
+
+    describe("getRole", () => {
+        it ('should return "Manager" as it is a special role compared to "Employee"', () => {
+            const michael = new Manager('Michael', 4, 'michael@email.com', 1);
+
+            expect(michael.getRole()).toEqual('Manager');
+        })
+    })
 });

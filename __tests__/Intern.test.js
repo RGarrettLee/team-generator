@@ -16,5 +16,27 @@ describe("Intern", () => {
 
             expect(cb).toThrow();
         });
+
+        it ('should throw an error if "school" argument is wrong type', () => { // missing school
+            const cb = () => new Intern('Danny', 77, 'danny@email.com', false);
+
+            expect(cb).toThrow();
+        });
+    });
+
+    describe("getRole", () => {
+        it ('should return "Intern" as it is a special role compared to "Employee"', () => {
+            const danny = new Intern('Danny', 77, 'danny@email.com', 'MIT');
+
+            expect(danny.getRole()).toEqual('Intern');
+        });
+    });
+
+    describe("getSchool", () => {
+        it ('should return the school of the Intern', () => {
+            const danny = new Intern('Danny', 77, 'danny@email.com', 'MIT');
+
+            expect(danny.getSchool()).toEqual('MIT');
+        });
     });
 });
