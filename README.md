@@ -39,6 +39,8 @@ node index.js test
 npm run test
 ```
 
+![tests](./assets/tests.png)
+
 ---
 
 ## Demo
